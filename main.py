@@ -27,7 +27,7 @@ class Download_csdn_article(object):
         csdn: Csdn sdk类
         article_list: 文章信息列表。[{'id': 'xxxx', 'title': 'xxxx'...}, {...}, ...]
         """
-        time_stamp = int(time.time())
+        time_stamp = '' # int(time.time())
         self.err_file_name = 'file_err{}.txt'.format(time_stamp)
         self.article_dir = 'articles{}'.format(time_stamp)
         os.path.exists(self.article_dir) or os.mkdir(self.article_dir)
