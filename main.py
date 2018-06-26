@@ -30,7 +30,6 @@ class Download_csdn_article(object):
         time_stamp = '' # int(time.time())
         self.err_file_name = 'file_err{}.txt'.format(time_stamp)
         self.article_dir = 'articles{}'.format(time_stamp)
-        os.path.exists(self.article_dir) or os.mkdir(self.article_dir)
         self.csdn = csdn_sdk.Csdn()
         self.csdn.get_oauth2()
         self.article_list = []
@@ -126,6 +125,7 @@ class Download_csdn_article(object):
 
     def download_article(self):
         self._get_article_list()
+        os.path.exists(self.article_dir) or os.mkdir(self.article_dir)
         file_err = open(self.err_file_name, 'w', encoding="utf-8")
         for article in self.article_list:
             # 文章的文件名前缀/保存文章中图片的目录名
