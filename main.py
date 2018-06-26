@@ -68,7 +68,8 @@ class Download_csdn_article(object):
                 '{%',
                 'asset_img',
                 matched.group('img_name'),
-                '[{}]'.format(matched.group('desc')) if matched.group('desc') else '',
+                '[{}]'.format(matched.group('desc')) if (
+                    matched.group('desc') and matched.group('desc') != '这里写图片描述') else '',
                 '%}'),
             art_content)
         img_path = '{}/{}'.format(self.article_dir, art_file_name_pre)
@@ -115,7 +116,7 @@ class Download_csdn_article(object):
     def _add_hexo_front_matter(self, art_content, title, create, tags, categories):
         print('文章中添加Front-matter。title：{}|create：{}|tags：{}|categories：{}|'.format(
             title, create, tags, categories))
-        art_title = re.sub(r'[:\t]+', ' ', title).lstrip().rstrip()
+        art_title = re.sub(r'([:\t]+|^[ ?]+)', ' ', title).lstrip().rstrip()
         art_date = create.replace('-', '/')
         art_tags = '[{}]'.format(tags)
         art_categories = '[{}]'.format(categories)
